@@ -1,0 +1,8 @@
+---
+title: "Census Tracts"
+---
+
+```{r}
+library(tidyverse)
+nyc_tracts <- read_csv("nyc_tracts.csv")
+```
