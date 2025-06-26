@@ -1,8 +1,31 @@
 ---
-title: "Census Tracts"
+author: Eric Butte
+execute:
+    echo: false
+    warning: false
 ---
 
 ```{r}
+#| message: false
 library(tidyverse)
-nyc_tracts <- read_csv("nyc_tracts.csv")
+nyc_tracts <- read_csv("data/nyc_tracts.csv")
 ```
+
+
+```{r}
+nyc_tracts |> 
+    drop_na(med_income) |>
+  ggplot(aes(x = race, y = med_income, fill = race)) +
+  geom_boxplot() +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  labs(
+    title = "Median Income by Majority Race in NYC Census Tracts",
+    subtitle = "Income distribution varies across racial majority groups",
+    x = "Majority Race in Tract",
+    y = "Median Household Income",
+    caption = "Data: nyc_tracts"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
